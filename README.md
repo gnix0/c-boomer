@@ -1,4 +1,4 @@
-# C-Boomer
+# Doomer
 
 Rewrite of Tsoding's "boomer" project in C, since his original uses Nim.
 
