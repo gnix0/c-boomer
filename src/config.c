@@ -1,15 +1,9 @@
+#include "config.h"
 #include "string_view.h"
 #include <stdio.h>
 
 #define SV_Fmt "%.*s"
 #define SV_Arg(s) (int)(s).len, (s).data
-
-typedef struct {
-    double min_scale;
-    double scroll_speed;
-    double drag_friction;
-    double scale_friction;
-} Config;
 
 const Config defaultConfig = {
     .min_scale = 0.01,
@@ -84,4 +78,35 @@ Config loadConfig(const char *filePath)
 
     fclose(file);
     return config;
+}
+
+int generateDefaultConfig(const char *filePath)
+{
+    FILE *file = fopen(filePath, "w");
+    if (file == NULL) {
+        perror("fopen");
+        return 0;
+    }
+
+    int result =
+        fprintf(file,
+                "min_scale = %.17g\n"
+                "scroll_speed = %.17g\n"
+                "drag_friction = %.17g\n"
+                "scale_friction = %.17g\n",
+                defaultConfig.min_scale, defaultConfig.scroll_speed,
+                defaultConfig.drag_friction, defaultConfig.scale_friction);
+
+    if (result < 0) {
+        perror("fprintf");
+        fclose(file);
+        return 0;
+    }
+
+    if (fclose(file) == EOF) {
+        perror("fclose");
+        return 0;
+    }
+
+    return 1;
 }
