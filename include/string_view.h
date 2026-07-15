@@ -4,8 +4,8 @@
 #include <stddef.h>
 
 typedef struct {
-  const char *data;
-  size_t len;
+    const char *data;
+    size_t len;
 
 } String_View;
 
