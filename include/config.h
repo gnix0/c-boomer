@@ -8,9 +8,9 @@ typedef struct {
     double scale_friction;
 } Config;
 
-extern const Config defaultConfig;
+extern const Config DEFAULT_CONFIG;
 
-Config loadConfig(const char *filePath);
-int generateDefaultConfig(const char *filePath);
+Config load_config(const char *filePath);
+int generate_default_config(const char *filePath);
 
 #endif

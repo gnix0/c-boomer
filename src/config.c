@@ -5,16 +5,16 @@
 #define SV_Fmt "%.*s"
 #define SV_Arg(s) (int)(s).len, (s).data
 
-const Config defaultConfig = {
+const Config DEFAULT_CONFIG = {
     .min_scale = 0.01,
     .scroll_speed = 1.5,
     .drag_friction = 6.0,
     .scale_friction = 4.0,
 };
 
-Config loadConfig(const char *filePath)
+Config load_config(const char *filePath)
 {
-    Config config = defaultConfig;
+    Config config = DEFAULT_CONFIG;
 
     FILE *file = fopen(filePath, "r");
     if (file == NULL) {
@@ -80,7 +80,7 @@ Config loadConfig(const char *filePath)
     return config;
 }
 
-int generateDefaultConfig(const char *filePath)
+int generate_default_config(const char *filePath)
 {
     FILE *file = fopen(filePath, "w");
     if (file == NULL) {
@@ -94,8 +94,8 @@ int generateDefaultConfig(const char *filePath)
                 "scroll_speed = %.17g\n"
                 "drag_friction = %.17g\n"
                 "scale_friction = %.17g\n",
-                defaultConfig.min_scale, defaultConfig.scroll_speed,
-                defaultConfig.drag_friction, defaultConfig.scale_friction);
+                DEFAULT_CONFIG.min_scale, DEFAULT_CONFIG.scroll_speed,
+                DEFAULT_CONFIG.drag_friction, DEFAULT_CONFIG.scale_friction);
 
     if (result < 0) {
         perror("fprintf");
